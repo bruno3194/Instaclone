@@ -1,5 +1,6 @@
 package com.bruno.naveen.instaclone;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -45,6 +46,8 @@ public class SignupLoginActivity extends AppCompatActivity {
                         if(e==null)
                         {
                             Toasty.success(SignupLoginActivity.this,appUser.getUsername()+" Is Registered Successfully",Toasty.LENGTH_LONG).show();
+                            Intent inn=new Intent(SignupLoginActivity.this,WelcomeActivity.class);
+                            startActivity(inn);
                         }
                         else
                         {
@@ -63,6 +66,8 @@ public class SignupLoginActivity extends AppCompatActivity {
                         if(user!=null&&e==null)
                         {
                             Toasty.success(SignupLoginActivity.this,"Successfully Logged In",Toasty.LENGTH_LONG).show();
+                            Intent inn=new Intent(SignupLoginActivity.this,WelcomeActivity.class);
+                            startActivity(inn);
                         }
                         else
                         {
