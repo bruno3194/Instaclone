@@ -1,5 +1,6 @@
 package com.bruno.naveen.instaclone;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -22,7 +23,7 @@ import es.dmoral.toasty.Toasty;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
-    private Button bt,bt2;
+    private Button bt,bt2,bt3;
     private EditText et1,et2,et3,et4,et5;
     private TextView tv;
     public static String str="";
@@ -70,6 +71,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Toasty.Config.getInstance().apply();
         bt = findViewById(R.id.button);
         bt2 = findViewById(R.id.btnAll);
+        bt3 = findViewById(R.id.btn3);
         et1 = findViewById(R.id.EditText);
         et2 = findViewById(R.id.EditText2);
         et3 = findViewById(R.id.EditText3);
@@ -107,6 +109,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 @Override
                 public void onClick(View view) {
                     ParseQuery<ParseObject> pq = ParseQuery.getQuery("Details");
+                    pq.whereGreaterThanOrEqualTo("Age",17);
+                    pq.setLimit(2);
                     pq.findInBackground(new FindCallback<ParseObject>() {
 
 
@@ -153,5 +157,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Toasty.error(MainActivity.this, "Error" + e.toString(), Toasty.LENGTH_SHORT).show();
 
         }
+        bt3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent in=new Intent(MainActivity.this,SignupLoginActivity.class);
+                startActivity(in);
+            }
+        });
     }
 }
