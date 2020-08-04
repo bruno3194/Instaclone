@@ -6,8 +6,8 @@
     android:layout_height="match_parent"
     android:background="#EA00FB"
     android:backgroundTint="#DA00FF"
-    android:onClick="rootTapped"
-    tools:context=".MainActivity">
+    android:onClick="root"
+    tools:context=".LoginActivity">
 
     <ImageView
         android:id="@+id/imageView"
@@ -20,69 +20,58 @@
         app:srcCompat="@drawable/placeholder" />
 
     <EditText
-        android:id="@+id/edtSignUpName"
+        android:id="@+id/edLogInEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="42dp"
+        android:layout_marginTop="59dp"
         android:ems="10"
-        android:hint="ENTER USER NAME"
-        android:inputType="textPersonName"
+        android:hint="ENTER EMAIL OR USER NAME"
+        android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <EditText
-        android:id="@+id/edtSignUpEmail"
+        android:id="@+id/edLogInPswd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="23dp"
-        android:ems="10"
-        android:hint="ENTER EMAIL...."
-        android:inputType="textEmailAddress"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.492"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtSignUpName" />
-
-    <EditText
-        android:id="@+id/edtSignUpPswd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="23dp"
+        android:layout_marginTop="53dp"
         android:ems="10"
         android:hint="ENTER PASSWORD..."
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtSignUpEmail" />
+        app:layout_constraintTop_toBottomOf="@+id/edLogInEmail" />
 
     <Button
-        android:id="@+id/btnSUSignUp"
+        android:id="@+id/btnLILogIn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
-        android:layout_marginTop="47dp"
-        android:layout_marginEnd="15dp"
-        android:backgroundTint="#009688"
-        android:text="SIGN UP"
-        android:textColor="#00FA0A"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtSignUpPswd" />
-
-    <Button
-        android:id="@+id/btnSULogIn"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="23dp"
+        android:layout_marginTop="13dp"
         android:layout_marginEnd="15dp"
         android:backgroundTint="#2196F3"
         android:text="LOG IN"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnSUSignUp" />
+        app:layout_constraintTop_toBottomOf="@+id/edLogInPswd" />
+
+    <Button
+        android:id="@+id/btnLISignUp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="15dp"
+        android:backgroundTint="#009688"
+        android:text="SIGN UP"
+        android:textColor="#00FA0A"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnLILogIn" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
