@@ -1,5 +1,6 @@
 package com.bruno.naveen.instaclone;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
@@ -31,7 +32,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         if(user!=null&&e==null)
                         {
                             Toasty.success(LoginActivity.this,"Successfully Logged In",Toasty.LENGTH_LONG).show();
-
+                            transitToSocialActivity();
                         }
                         else
                         {
@@ -81,7 +82,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         //TO MAKE SURE NO CURRENT USER IS LOGGED IN (TO AVOID CONFLICTS)(TEMPROARY)
         if(ParseUser.getCurrentUser()!=null)
         {
-            ParseUser.getCurrentUser().logOut();
+          //  ParseUser.getCurrentUser().logOut();
+            transitToSocialActivity();
         }
+    }
+    private void transitToSocialActivity()
+    {
+        Intent imp=new Intent(LoginActivity.this,SocialMediaActivity.class);
+        startActivity(imp);
     }
 }

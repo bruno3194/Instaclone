@@ -40,6 +40,7 @@ private EditText et1,et2,et3;
                         public void done(ParseException e) {
                             if (e == null) {
                                 Toasty.success(MainActivity.this, user.getUsername() + " Is Registered Successfully", Toasty.LENGTH_LONG).show();
+                                transitToSocialActivity();
 
                             } else {
                                 Toasty.error(MainActivity.this, "Error : " + e.getMessage(), Toasty.LENGTH_LONG).show();
@@ -84,7 +85,8 @@ private EditText et1,et2,et3;
         //TO MAKE SURE NO CURRENT USER IS LOGGED IN (TO AVOID CONFLICTS)(TEMPROARY)
         if(ParseUser.getCurrentUser()!=null)
         {
-            ParseUser.getCurrentUser().logOut();
+            //ParseUser.getCurrentUser().logOut();
+            transitToSocialActivity();
         }
 
         b1.setOnClickListener(this);
@@ -101,4 +103,9 @@ private EditText et1,et2,et3;
         });
 
     }
+        private void transitToSocialActivity()
+        {
+            Intent imp=new Intent(MainActivity.this,SocialMediaActivity.class);
+            startActivity(imp);
+        }
 }
