@@ -1,11 +1,14 @@
 package com.bruno.naveen.instaclone;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
+import com.parse.ParseUser;
 
 public class SocialMediaActivity extends AppCompatActivity {
     private androidx.appcompat.widget.Toolbar toolbar;
@@ -27,5 +30,8 @@ public class SocialMediaActivity extends AppCompatActivity {
 
         tabLayout=findViewById(R.id.tabLayout);
         tabLayout.setupWithViewPager(viewPager,false);
+
+
     }
+
 }
