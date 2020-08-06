@@ -70,7 +70,7 @@ public class ProfileTab extends Fragment {
             ed.setText("");
         else
             ed.setText(cur.get("profileName")+"");
-        Toasty.success(getContext(),str,Toasty.LENGTH_LONG).show();
+        //Toasty.success(getContext(),str,Toasty.LENGTH_LONG).show();
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
