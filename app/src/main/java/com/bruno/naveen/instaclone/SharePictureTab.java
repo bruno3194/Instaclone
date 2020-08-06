@@ -189,6 +189,7 @@ public class SharePictureTab extends Fragment implements View.OnClickListener {
             if(resultCode== Activity.RESULT_OK)
             {
                 try {
+                    //method 2 in socialMedia activity(w/o cursor)
                     Uri selected=data.getData();
                     String[] filePath={MediaStore.Images.Media.DATA};
                     Cursor cur=getActivity().getContentResolver().query(selected,filePath,null,null,null);

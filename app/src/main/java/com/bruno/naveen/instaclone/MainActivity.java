@@ -53,7 +53,6 @@ private EditText et1,et2,et3;
             case R.id.btnSULogIn:
                 Intent in=new Intent(MainActivity.this,LoginActivity.class);
                 startActivity(in);
-
                 break;
 
         }
@@ -107,5 +106,6 @@ private EditText et1,et2,et3;
         {
             Intent imp=new Intent(MainActivity.this,SocialMediaActivity.class);
             startActivity(imp);
+            finish();
         }
 }
