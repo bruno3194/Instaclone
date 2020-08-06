@@ -2,6 +2,7 @@ package com.bruno.naveen.instaclone;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -22,6 +23,16 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
+
+import com.parse.ParseException;
+import com.parse.ParseFile;
+import com.parse.ParseObject;
+import com.parse.ParseUser;
+import com.parse.SaveCallback;
+
+import java.io.ByteArrayOutputStream;
+
+import es.dmoral.toasty.Toasty;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -51,6 +62,49 @@ public class SharePictureTab extends Fragment implements View.OnClickListener {
 
                 break;
             case R.id.btnShare:
+                if(recvd!=null)
+                {
+                    if(edet.getText().toString().equals(""))
+                    {
+                        Toasty.error(getContext(),"You Must Enter A Description",Toasty.LENGTH_SHORT).show();
+
+                    }
+                    else
+                    {
+                        ByteArrayOutputStream byteArrayOutputStream=new ByteArrayOutputStream();
+                        recvd.compress(Bitmap.CompressFormat.PNG,100,byteArrayOutputStream);
+                        byte[] pichu=byteArrayOutputStream.toByteArray();
+                        //server..
+                        ParseFile ps=new ParseFile("bru.png",pichu);
+                        ParseObject po=new ParseObject("Photos");
+                        po.put("picture",ps);
+                        po.put("description",edet.getText().toString());
+                        po.put("username", ParseUser.getCurrentUser().getUsername());
+                        final ProgressDialog pd=new ProgressDialog(getContext());
+                        pd.setMessage("Uploading");
+                        pd.show();
+                        po.saveInBackground(new SaveCallback() {
+                            @Override
+                            public void done(ParseException e) {
+                                if(e==null)
+                                {
+                                    Toasty.success(getContext(),"SUCCESSFULLY UPLOADED",Toasty.LENGTH_LONG).show();
+                                }
+                                else
+                                {
+                                    Toasty.error(getContext(),"Error : "+e.getMessage(),Toasty.LENGTH_LONG).show();
+                                }
+                                pd.dismiss();
+
+                            }
+                        });
+                    }
+
+                }
+                else
+                {
+                    Toasty.error(getContext(),"You Must Select An Image",Toasty.LENGTH_SHORT).show();
+                }
                 break;
         }
 
@@ -67,6 +121,7 @@ public class SharePictureTab extends Fragment implements View.OnClickListener {
     private ImageView im;
     private EditText edet;
     private Button btn;
+    private Bitmap recvd;
 
     public SharePictureTab() {
         // Required empty public constructor
@@ -141,7 +196,7 @@ public class SharePictureTab extends Fragment implements View.OnClickListener {
                     int ci=cur.getColumnIndex(filePath[0]);
                     String pp=cur.getString(ci);
                     cur.close();
-                    Bitmap recvd= BitmapFactory.decodeFile(pp);
+                    recvd= BitmapFactory.decodeFile(pp);
                     im.setImageBitmap(recvd);
                 }
                 catch (Exception e)
