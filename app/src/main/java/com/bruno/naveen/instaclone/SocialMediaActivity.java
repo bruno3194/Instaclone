@@ -39,7 +39,7 @@ public class SocialMediaActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_social_media);
-        setTitle("SocialMedia Appp!!!");
+        setTitle("Welcome "+ParseUser.getCurrentUser().getUsername()+" !!!");
 
         toolbar=findViewById(R.id.mytoolbar);
         setSupportActionBar(toolbar);
@@ -75,7 +75,7 @@ public class SocialMediaActivity extends AppCompatActivity {
             }
 
         }
-        else if(item.getItemId()==R.id.postImageItem)
+        else if(item.getItemId()==R.id.logOutItem)
         {
             ParseUser.getCurrentUser().logOut();
             finish();

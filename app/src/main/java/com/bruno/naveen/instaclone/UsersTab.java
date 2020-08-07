@@ -1,9 +1,11 @@
 package com.bruno.naveen.instaclone;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -23,7 +25,14 @@ import java.util.List;
  * Use the {@link UsersTab#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class UsersTab extends Fragment {
+public class UsersTab extends Fragment implements AdapterView.OnItemClickListener {
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
+    {
+        Intent inb=new Intent(getContext(),UsersPost.class);
+        inb.putExtra("username",arr.get(i).toString());
+        startActivity(inb);
+    }
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -77,6 +86,8 @@ public class UsersTab extends Fragment {
         lst=vv.findViewById(R.id.lst);
         arr=new ArrayList();
         ad=new ArrayAdapter(getContext(),android.R.layout.simple_list_item_1,arr);
+
+        lst.setOnItemClickListener(UsersTab.this);
 
         ParseQuery<ParseUser> pq= ParseUser.getQuery();
         pq.whereNotEqualTo("username",ParseUser.getCurrentUser().get("username"));
