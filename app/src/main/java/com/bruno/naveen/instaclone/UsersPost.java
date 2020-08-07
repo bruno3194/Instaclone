@@ -23,6 +23,8 @@ import com.parse.ParseQuery;
 
 import java.util.List;
 
+import es.dmoral.toasty.Toasty;
+
 public class UsersPost extends AppCompatActivity {
 
     private  LinearLayout ll;
@@ -54,6 +56,8 @@ public class UsersPost extends AppCompatActivity {
                         final TextView imgDesc=new TextView(UsersPost.this);
                         String str=post.get("description")+"";
                         imgDesc.setText(str);
+                        if(str.equals("null"))
+                        imgDesc.setText("Picture");
                         ParseFile pf=(ParseFile)post.get("picture");
                         pf.getDataInBackground(new GetDataCallback() {
                             @Override
@@ -63,14 +67,14 @@ public class UsersPost extends AppCompatActivity {
                                     Bitmap bm= BitmapFactory.decodeByteArray(data,0,data.length);
                                     ImageView im=new ImageView(UsersPost.this);
 
-                                    LinearLayout.LayoutParams imgParams=new LinearLayout.LayoutParams(600,600);
+                                    LinearLayout.LayoutParams imgParams=new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                                     imgParams.setMargins(5,5,5,5);
                                     im.setLayoutParams(imgParams);
 
                                     im.setScaleType(ImageView.ScaleType.CENTER);
                                     im.setImageBitmap(bm);
 
-                                    LinearLayout.LayoutParams desParams=new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+                                    LinearLayout.LayoutParams desParams=new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                                     desParams.setMargins(5,5,5,5);
                                     imgDesc.setLayoutParams(desParams);
 
@@ -82,11 +86,17 @@ public class UsersPost extends AppCompatActivity {
                                     ll.addView(im);
                                     ll.addView(imgDesc);
                                 }
-                                pd.dismiss();
+
                             }
                         });
                     }
                 }
+                else
+                {
+                    Toasty.warning(UsersPost.this,"No Posts by this User",Toasty.LENGTH_SHORT).show();
+                    finish();
+                }
+                pd.dismiss();
             }
         });
 

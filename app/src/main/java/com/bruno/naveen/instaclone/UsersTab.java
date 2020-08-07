@@ -13,6 +13,7 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 import com.parse.FindCallback;
+import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
@@ -20,12 +21,14 @@ import com.parse.ParseUser;
 import java.util.ArrayList;
 import java.util.List;
 
+import es.dmoral.toasty.Toasty;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link UsersTab#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class UsersTab extends Fragment implements AdapterView.OnItemClickListener {
+public class UsersTab extends Fragment implements AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener {
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
     {
@@ -88,6 +91,7 @@ public class UsersTab extends Fragment implements AdapterView.OnItemClickListene
         ad=new ArrayAdapter(getContext(),android.R.layout.simple_list_item_1,arr);
 
         lst.setOnItemClickListener(UsersTab.this);
+        lst.setOnItemLongClickListener(UsersTab.this);
 
         ParseQuery<ParseUser> pq= ParseUser.getQuery();
         pq.whereNotEqualTo("username",ParseUser.getCurrentUser().get("username"));
@@ -107,5 +111,34 @@ public class UsersTab extends Fragment implements AdapterView.OnItemClickListene
                 }
         });
 return vv;
+    }
+
+    @Override
+    public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+        ParseQuery<ParseUser> pe=ParseUser.getQuery();
+        pe.whereEqualTo("username",arr.get(i).toString());
+        pe.getFirstInBackground(new GetCallback<ParseUser>() {
+            @Override
+            public void done(ParseUser object, ParseException e) {
+                if(object!=null && e==null)
+                {
+                   Toasty.custom(getContext(),"BIO:\n"+object.get("profileBio")+"\nProfession : "+object.get("profileProfession")+"\nHobbies:\n"+object.get("profileHobbies"),getContext().getDrawable(R.drawable.smile), Toasty.LENGTH_LONG,true).show();
+//                             *********************BUGGY*******************************
+//                    new IonAlert(getContext(), IonAlert.WARNING_TYPE)
+//                            .setTitleText((object.get("username")+"").toUpperCase())
+//                            .setContentText("BIO:\n"+object.get("profileBio")+"\nProfession : "+object.get("profileProfession")+"\nHobbies:\n"+object.get("profileHobbies"))
+//                            .setConfirmText("OK")
+//                            .setCustomImage(R.drawable.smile)
+//                            .setConfirmClickListener(new IonAlert.ClickListener() {
+//                                @Override
+//                                public void onClick(IonAlert sDialog) {
+//                                    sDialog.dismissWithAnimation();
+//                                }
+//                            })
+//                            .show();
+                }
+            }
+        });
+        return true;
     }
 }

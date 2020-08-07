@@ -1,0 +1,42 @@
+Index: app/src/main/java/com/bruno/naveen/instaclone/UsersPost.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/bruno/naveen/instaclone/UsersPost.java	(revision 902db2801032fe6735e0e803e805b53aa19f6a1d)
++++ app/src/main/java/com/bruno/naveen/instaclone/UsersPost.java	(date 1596794082623)
+@@ -10,6 +10,7 @@
+ import android.view.ViewGroup;
+ import android.widget.ImageView;
+ import android.widget.LinearLayout;
++import android.widget.ScrollView;
+ import android.widget.TextView;
+ 
+ import androidx.appcompat.app.AppCompatActivity;
+@@ -25,7 +26,7 @@
+ 
+ public class UsersPost extends AppCompatActivity {
+ 
+-    private  LinearLayout ll;
++    private ScrollView ll;
+     @Override
+     protected void onCreate(Bundle savedInstanceState) {
+         super.onCreate(savedInstanceState);
+@@ -43,7 +44,7 @@
+         pd.setMessage("Loading posts..");
+         pd.show();
+ 
+-        ll=findViewById(R.id.linearLayout);
++        ll=findViewById(R.id.scrollView2);
+         parseQuery.findInBackground(new FindCallback<ParseObject>() {
+             @Override
+             public void done(List<ParseObject> objects, ParseException e) {
+@@ -80,7 +81,7 @@
+                                     imgDesc.setTextSize(27f);
+ 
+                                     ll.addView(im);
+-                                    ll.addView(imgDesc);
++                                    //ll.addView(imgDesc);
+                                 }
+                                 pd.dismiss();
+                             }
