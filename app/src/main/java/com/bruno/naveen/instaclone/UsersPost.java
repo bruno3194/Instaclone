@@ -67,12 +67,17 @@ public class UsersPost extends AppCompatActivity {
                                     Bitmap bm= BitmapFactory.decodeByteArray(data,0,data.length);
                                     ImageView im=new ImageView(UsersPost.this);
 
+                                    int netWidth=ll.getWidth(),netHeight=ll.getHeight();
+                                    Bitmap resizedBitmap = Bitmap.createScaledBitmap(bm, ll.getWidth(), 750, false);
+
+
                                     LinearLayout.LayoutParams imgParams=new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                                     imgParams.setMargins(5,5,5,5);
                                     im.setLayoutParams(imgParams);
 
+
+                                    im.setImageBitmap(resizedBitmap);
                                     im.setScaleType(ImageView.ScaleType.CENTER);
-                                    im.setImageBitmap(bm);
 
                                     LinearLayout.LayoutParams desParams=new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                                     desParams.setMargins(5,5,5,5);
